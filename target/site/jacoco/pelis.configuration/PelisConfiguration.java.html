@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PelisConfiguration.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.ism.pelis Maven Webapp</a> &gt; <a href="index.source.html" class="el_package">pelis.configuration</a> &gt; <span class="el_source">PelisConfiguration.java</span></div><h1>PelisConfiguration.java</h1><pre class="source lang-java linenums">package pelis.configuration;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+
+@Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = &quot;pelis&quot;)
+<span class="fc" id="L16">public class PelisConfiguration extends WebMvcConfigurerAdapter {</span>
+	@Bean
+    public ViewResolver viewResolver() {
+<span class="fc" id="L19">        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();</span>
+<span class="fc" id="L20">        viewResolver.setViewClass(JstlView.class);</span>
+<span class="fc" id="L21">        viewResolver.setPrefix(&quot;/WEB-INF/vistas/&quot;);</span>
+<span class="fc" id="L22">        viewResolver.setSuffix(&quot;.jsp&quot;);</span>
+ 
+<span class="fc" id="L24">        return viewResolver;</span>
+    }
+ 
+     /*
+     * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+<span class="fc" id="L32">        registry.addResourceHandler(&quot;/resources/**&quot;).addResourceLocations(&quot;/resources/&quot;);</span>
+<span class="fc" id="L33">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

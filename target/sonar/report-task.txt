@@ -1,0 +1,6 @@
+projectKey=pelis:pelis
+serverUrl=http://localhost:9000
+serverVersion=6.7.3.38370
+dashboardUrl=http://localhost:9000/dashboard/index/pelis:pelis
+ceTaskId=AWLQaop7GniMIqXyZdBV
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWLQaop7GniMIqXyZdBV

@@ -1,0 +1,21 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+com.ism.pelis Maven Webapp,pelis.services,GeneroServiceImpl,3,8,0,0,2,3,1,1,1,1
+com.ism.pelis Maven Webapp,pelis.services,CustomUserDetailsServiceImpl,9,99,1,3,2,14,1,4,0,3
+com.ism.pelis Maven Webapp,pelis.services,UserServiceImpl,0,13,0,0,0,3,0,3,0,3
+com.ism.pelis Maven Webapp,pelis.services,BaseServiceImpl,0,38,0,0,0,14,0,8,0,8
+com.ism.pelis Maven Webapp,pelis.dto,UserProfileType,9,48,0,0,0,8,2,3,2,3
+com.ism.pelis Maven Webapp,pelis.dto,State,15,59,0,0,2,9,4,3,4,3
+com.ism.pelis Maven Webapp,pelis.controller,InicioController,68,10,4,0,19,3,8,2,6,2
+com.ism.pelis Maven Webapp,pelis.dao,UserDaoImpl,0,22,0,0,0,5,0,3,0,3
+com.ism.pelis Maven Webapp,pelis.dao,GeneroDaoImpl,0,3,0,0,0,1,0,1,0,1
+com.ism.pelis Maven Webapp,pelis.dao,AbstractDao,5,58,0,0,2,14,1,9,1,9
+com.ism.pelis Maven Webapp,pelis.configuration,HibernateConfiguration,0,94,0,0,0,20,0,5,0,5
+com.ism.pelis Maven Webapp,pelis.configuration,SecurityWebApplicationInitializer,3,0,0,0,1,0,1,0,1,0
+com.ism.pelis Maven Webapp,pelis.configuration,SpringMvcInitializer,19,0,0,0,4,0,4,0,4,0
+com.ism.pelis Maven Webapp,pelis.configuration,CustomSuccessHandler,88,13,10,0,26,3,12,1,7,1
+com.ism.pelis Maven Webapp,pelis.configuration,SecurityConfiguration,0,67,0,0,0,12,0,3,0,3
+com.ism.pelis Maven Webapp,pelis.configuration,PelisConfiguration,0,35,0,0,0,8,0,3,0,3
+com.ism.pelis Maven Webapp,pelis.domain,UserProfile,55,51,15,1,20,10,12,4,4,4
+com.ism.pelis Maven Webapp,pelis.domain,Titulo,0,3,0,0,0,1,0,1,0,1
+com.ism.pelis Maven Webapp,pelis.domain,Genero,6,11,0,0,2,5,2,3,2,3
+com.ism.pelis Maven Webapp,pelis.domain,User,112,71,16,0,40,9,22,6,14,6
