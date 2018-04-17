@@ -16,6 +16,7 @@ private TituloDao dao;
 public TituloServiceImpl(){
 
 }
+
 @Autowired
 public TituloServiceImpl(
        @Qualifier("tituloDao") AbstractDao<Integer, Titulo> genericDao) {
