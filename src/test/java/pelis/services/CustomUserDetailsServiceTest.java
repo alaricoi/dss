@@ -1,29 +1,17 @@
 package pelis.services;
 
-import static org.junit.Assert.*;
-
-import javax.transaction.Transactional;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
 
-import pelis.configuration.HibernateConfiguration;
-import pelis.configuration.PelisConfiguration;
+import pelis.CustomTest;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PelisConfiguration.class, HibernateConfiguration.class})
-@TransactionConfiguration(defaultRollback = true)
-@Transactional
-@WebAppConfiguration
-public class CustomUserDetailsServiceTest {
+
+public class CustomUserDetailsServiceTest extends CustomTest{
 	
 	@Autowired
     @Qualifier("customUserDetailsService")

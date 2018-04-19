@@ -8,7 +8,7 @@ package pelis.domain;
 	import javax.persistence.Id;
 	import javax.persistence.Table;
 
-import pelis.dto.UserProfileType;
+import pelis.dto.tiposPerfilesUsu;
 	 
 	@Entity
 	@Table(name="USER_PROFILE")
@@ -18,7 +18,7 @@ import pelis.dto.UserProfileType;
 	    private int id; 
 	 
 	    @Column(name="TYPE", length=15, unique=true, nullable=false)
-	    private String type = UserProfileType.USER.getUserProfileType();
+	    private String type = tiposPerfilesUsu.USER.getTipoPerfile();
 	     
 	    public int getId() {
 	        return id;

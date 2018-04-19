@@ -1,34 +1,31 @@
 package pelis.services;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import pelis.configuration.HibernateConfiguration;
-import pelis.configuration.PelisConfiguration;
+import pelis.CustomTest;
 import pelis.domain.Genero;
-@RunWith(SpringJUnit4ClassRunner.class)
 
-@ContextConfiguration(classes = {PelisConfiguration.class, HibernateConfiguration.class})
-@TransactionConfiguration(defaultRollback = true)
-@Transactional
-@WebAppConfiguration
-public class GeneroServiceImplTest {
+public class GeneroServiceImplTest extends CustomTest{
 
 	
 	@Autowired
+	@Qualifier("generoService")
 	GeneroService generoService;
+
 	
+	@Before
+	 public void isnull () {
+		if ( generoService == null)
+		 fail("nulo");
+	}
 	@Test
 	public void testSaveOrUpdate() {
 		Genero g = new Genero();

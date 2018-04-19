@@ -2,32 +2,20 @@ package pelis.services;
 
 import static org.junit.Assert.assertNotNull;
 
-import javax.transaction.Transactional;
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import pelis.configuration.HibernateConfiguration;
-import pelis.configuration.PelisConfiguration;
+import pelis.CustomTest;
 import pelis.domain.User;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
-
-@ContextConfiguration(classes = {PelisConfiguration.class, HibernateConfiguration.class})
-@TransactionConfiguration(defaultRollback = true)
-@Transactional
-@WebAppConfiguration
-public class UserServiceImplTest {
+public class UserServiceImplTest extends CustomTest {
 	
 	
 	  
 	@Autowired
+	@Qualifier("userService")
 	UserService userService;
 	
 	@Test
