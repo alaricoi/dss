@@ -9,25 +9,26 @@ import pelis.dao.TituloDao;
 import pelis.domain.Titulo;
 
 @Service("tituloService")
-public class TituloServiceImpl extends BaseServiceImpl<Integer, Titulo> 
-implements TituloService{
-private TituloDao dao;
+public class TituloServiceImpl extends BaseServiceImpl<Integer, Titulo> implements TituloService {
 
-public TituloServiceImpl(){
+	private TituloDao dao;
 
-}
+	public TituloServiceImpl() {
 
-@Autowired
-public TituloServiceImpl(
-       @Qualifier("tituloDao") AbstractDao<Integer, Titulo> genericDao) {
-   super(genericDao);
-   this.setDao((TituloDao) genericDao);
-}
-public TituloDao getDao() {
-	return dao;
-}
-public void setDao(TituloDao dao) {
-	this.dao = dao;
-}
- 
+	}
+
+	@Autowired
+	public TituloServiceImpl(@Qualifier("tituloDao") AbstractDao<Integer, Titulo> genericDao) {
+		super(genericDao);
+		this.setDao((TituloDao) genericDao);
+	}
+
+	public TituloDao getDao() {
+		return dao;
+	}
+
+	public void setDao(TituloDao dao) {
+		this.dao = dao;
+	}
+
 }

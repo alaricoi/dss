@@ -1,10 +1,15 @@
 package pelis.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +24,12 @@ public class Genero {
 
 	@Column(name="DS_GENERO", nullable=false)
 	 private String dsGenero;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "genero")
+	private Set<Titulo> titulos = new HashSet<Titulo>(
+			0);
 
+	
 	public int getIdGenero() {
 		return idGenero;
 	}
