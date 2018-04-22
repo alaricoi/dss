@@ -159,10 +159,8 @@ public class Titulo {
 			return false;
 		Titulo other = (Titulo) obj;
 	
-		if (idTitulo != other.idTitulo)
-			return false;
-		
-		return true;
+		return (idTitulo != other.idTitulo);
+	
 	}
 
 	

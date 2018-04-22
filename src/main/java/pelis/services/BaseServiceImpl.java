@@ -14,11 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 import pelis.dao.AbstractDao;
 
 @Service
-public class BaseServiceImpl<PK extends Serializable, E>  implements BaseService<PK, E> {
+public class BaseServiceImpl<P extends Serializable, E>  implements BaseService<P, E> {
 	
-	    private AbstractDao<PK, E> genericDao;
+	    private AbstractDao<P, E> genericDao;
 	 
-	    public BaseServiceImpl(AbstractDao<PK,E> genericDao) {
+	    public BaseServiceImpl(AbstractDao<P,E> genericDao) {
 	        this.genericDao=genericDao;
 	    }
 	 
@@ -45,7 +45,7 @@ public class BaseServiceImpl<PK extends Serializable, E>  implements BaseService
 	
 	    
 	    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-		public E getByKey(PK key) {
+		public E getByKey(P key) {
 			return genericDao.getByKey(key);
 		}
 	    @Transactional(propagation = Propagation.REQUIRED)

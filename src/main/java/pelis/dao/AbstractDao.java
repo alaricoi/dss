@@ -13,7 +13,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
  
-public abstract class AbstractDao<PK extends Serializable, T> {
+public abstract class AbstractDao<P extends Serializable, T> {
      
     private final Class<T> persistentClass;
      
@@ -30,7 +30,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
     }
  
     @SuppressWarnings("unchecked")
-    public T getByKey(PK key) {
+    public T getByKey(P key) {
         return (T) getSession().get(persistentClass, key);
     }
  
@@ -39,8 +39,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
     }
  
     
-    @SuppressWarnings("unchecked")
-	public Integer save(T entity){
+    public Integer save(T entity){
     	return  (Integer) getSession().save(entity);
 	}
 	

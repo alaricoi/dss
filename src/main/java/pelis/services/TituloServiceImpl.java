@@ -1,7 +1,5 @@
 package pelis.services;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -23,7 +21,15 @@ public class TituloServiceImpl extends BaseServiceImpl<Integer, Titulo> implemen
 	@Autowired
 	public TituloServiceImpl(@Qualifier("tituloDao") AbstractDao<Integer, Titulo> genericDao) {
 		super(genericDao);
-		this.dao =  (TituloDao) genericDao;
+		this.setDao((TituloDao) genericDao);
+	}
+
+	public TituloDao getDao() {
+		return dao;
+	}
+
+	public void setDao(TituloDao dao) {
+		this.dao = dao;
 	}
 
 	

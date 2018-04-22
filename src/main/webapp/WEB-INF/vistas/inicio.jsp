@@ -2,6 +2,7 @@
     contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
    <head>
       <title>Hello World</title>
@@ -9,5 +10,15 @@
    <body>
       <h2>${message}</h2>
        <c:out value="${model.message}" />
+       <c:if test="${not empty listaPelis}">
+
+		<ul>
+			<c:forEach var="listValue" items="${listaPelis}">
+				<li>${listValue.idTitulo}</li>
+			</c:forEach>
+		</ul>
+
+	</c:if>
+       
    </body>
 </html>

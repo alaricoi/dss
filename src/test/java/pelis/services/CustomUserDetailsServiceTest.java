@@ -14,7 +14,7 @@ import pelis.CustomTest;
 public class CustomUserDetailsServiceTest extends CustomTest{
 	
 	@Autowired
-    @Qualifier("customUserDetailsService")
+    @Qualifier("miUserDetailsService")
     UserDetailsService userDetailsService;
 	
 	@Test

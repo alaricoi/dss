@@ -154,9 +154,7 @@ public class Opinion {
 		if (!(obj instanceof Opinion))
 			return false;
 		Opinion other = (Opinion) obj;
-		if (idOpinion != other.idOpinion)
-			return false;
-		return true;
+		return (idOpinion != other.idOpinion);
 	}
 	
 	

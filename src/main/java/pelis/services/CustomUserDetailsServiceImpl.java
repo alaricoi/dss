@@ -17,13 +17,15 @@ import org.springframework.stereotype.Service;
 import pelis.domain.User;
 import pelis.domain.UserProfile;
 
-@Service("customUserDetailsService")
+@Service("miUserDetailsService")
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
 	
 	 private final Log log = LogFactory.getLog(getClass());
+	 
 	@Autowired
 	private UserService userService;
 
+	
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String ssoId)  {
 		User user = userService.findBySso(ssoId);

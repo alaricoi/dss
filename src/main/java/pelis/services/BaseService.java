@@ -6,11 +6,11 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Criterion;
 
 
-public interface BaseService <PK, E> {
+public interface BaseService <P, E> {
 	
     public void saveOrUpdate(E entity);
     public List<E> getAll();
-    public E getByKey(PK key);
+    public E getByKey(P key);
     public Integer save(E entity);
     public void update(E entity);
     public void delete(E entity);

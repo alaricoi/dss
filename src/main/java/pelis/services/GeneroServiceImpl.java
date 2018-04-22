@@ -22,7 +22,13 @@ public class GeneroServiceImpl  extends BaseServiceImpl<Integer, Genero>
 	    public GeneroServiceImpl(
 	            @Qualifier("generoDao") AbstractDao<Integer, Genero> genericDao) {
 	        super(genericDao);
-	        this.generoDao = (GeneroDao) genericDao;
+	        this.setGeneroDao((GeneroDao) genericDao);
 	    }
+		public GeneroDao getGeneroDao() {
+			return generoDao;
+		}
+		public void setGeneroDao(GeneroDao generoDao) {
+			this.generoDao = generoDao;
+		}
 	 
 }

@@ -1,10 +1,16 @@
 package pelis.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.List;
 
+
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,6 +118,35 @@ public class TituloServiceImplTest extends CustomTest{
 		
 	}
 	
+	
+	@Test
+	public void testFind() {
+		List<Criterion> l = new ArrayList<Criterion>();
+		Criterion c = Restrictions.eq("dsTitulo", "Otra prueba");
+	    l.add(c);
+		List<Titulo> lt = tituloService.find(l, new ArrayList<Order>() );
+		assertNotNull("lista vacia", lt);
+		log.info("Encontrados " + lt.size());
+		log.info("El contador es:" + tituloService.count(l));
+		
+		
+	}
+	
+	@Test
+	public void testFindPaginado() {
+		List<Criterion> l = new ArrayList<Criterion>();
+		Criterion c = Restrictions.eq("dsTitulo", "Prueba1");
+	    l.add(c);
+		List<Titulo> lt = tituloService.find(l, new ArrayList<Order>(),1,3 );
+		assertNotNull("lista vacia", lt);
+		Long count = tituloService.count(l);
+		log.info("Encontrados " + lt.size());
+		log.info("El contador es:" + count);
+		
+		
+	}
+	
+	
 	private Genero crearGenero() {
 		Genero g = new Genero();
 		g.setDsGenero("Prueba1");
@@ -127,6 +162,7 @@ public class TituloServiceImplTest extends CustomTest{
 		o.setTlOpinion("Prueba de opnion");
 		o.setUser(userService.findById(1));
 		o.setIdOpinion(opinionService.save(o));
+		log.info(o.toString());
 		return o;
 		
 	}

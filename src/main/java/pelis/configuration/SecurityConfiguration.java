@@ -15,15 +15,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	
 		@Autowired
-	    @Qualifier("customUserDetailsService")
-	    UserDetailsService userDetailsService;
+	    @Qualifier("miUserDetailsService")
+	    UserDetailsService miUserDetailsService;
 	     
 		@Autowired
 	    CustomSuccessHandler customSuccessHandler;
 		
 		@Autowired
 	    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-	        auth.userDetailsService(userDetailsService);
+	        auth.userDetailsService(miUserDetailsService);
 	    }
 	    
 	
