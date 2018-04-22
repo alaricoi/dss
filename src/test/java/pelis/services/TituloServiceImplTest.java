@@ -1,6 +1,6 @@
 package pelis.services;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -12,10 +12,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import pelis.CustomTest;
 import pelis.domain.Genero;
+import pelis.domain.Opinion;
 import pelis.domain.Titulo;
 
 public class TituloServiceImplTest extends CustomTest{
-
+	
+	
+	 
 	@Autowired
 	@Qualifier("generoService")
 	GeneroService generoService;
@@ -25,6 +28,13 @@ public class TituloServiceImplTest extends CustomTest{
 	@Qualifier("tituloService")
 	TituloService tituloService;
 	
+	@Autowired
+	@Qualifier("userService")
+	UserService userService;
+	
+	@Autowired 
+	@Qualifier("opinionService")
+	OpinionService opinionService;
 	
 
 	@Before
@@ -63,9 +73,11 @@ public class TituloServiceImplTest extends CustomTest{
 	@Test
 	public void testGetByKey() {
 		
-		Integer pk = creaTitulo();
-		Titulo t = tituloService.getByKey(pk);
-		assertNotNull("titulo no encontrado", t);
+		Titulo t1 = creaTitulo();
+		Titulo t = tituloService.getByKey(t1.getIdTitulo());
+		log.info(t.toString());
+		assertEquals("titulo no encontrado", t, t1);
+		
 	}
 
 	@Test
@@ -73,20 +85,29 @@ public class TituloServiceImplTest extends CustomTest{
 		creaTitulo();
 	}
 
-	private Integer creaTitulo() {
+	private Titulo creaTitulo() {
 		Titulo t = new Titulo();
 		t.setGenero( crearGenero());
 		t.setDsTitulo("Prueba1");
+		t.setDsDirector("Director");
+		t.setNmAnyo(2017);
+		t.setTlReparto("Prueba de reparto");
+		t.setTlSinopsis("Prueba de sinopsis");
+		
+		
+		
 		Integer pk= tituloService.save(t);
-		return pk;
+		t.setIdTitulo(pk);
+		Opinion o = crearOpinion(t);
+		
+				
+		return t;
 	}
 
 	@Test
 	public void testDelete() {
 
-		Integer pk = creaTitulo();
-		Titulo t = tituloService.getByKey(pk);
-	
+		Titulo t = creaTitulo();
 		tituloService.delete(t);
 		
 	}
@@ -96,6 +117,17 @@ public class TituloServiceImplTest extends CustomTest{
 		g.setDsGenero("Prueba1");
 		g.setIdGenero(generoService.save(g));
 		return g;
+		
+	}
+	
+	private Opinion crearOpinion(Titulo titulo) {
+		Opinion o = new Opinion();
+		o.setNmOpinion(1);
+		o.setTitulo(titulo);
+		o.setTlOpinion("Prueba de opnion");
+		o.setUser(userService.findById(1));
+		o.setIdOpinion(opinionService.save(o));
+		return o;
 		
 	}
 

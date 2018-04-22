@@ -1,5 +1,8 @@
 package pelis.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +40,9 @@ public class Titulo {
 	@Column(name = "NM_ANYO")
 	private Integer nmAnyo;
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "titulo")
+	private Set<Opinion> opiniones = new HashSet<Opinion>(0);
+	
 	public int getIdTitulo() {
 		return idTitulo;
 	}
@@ -91,6 +98,75 @@ public class Titulo {
 	public void setNmAnyo(Integer nmAnyo) {
 		this.nmAnyo = nmAnyo;
 	}
+
+	
+	
+	/**
+	 * @return the opiniones
+	 */
+	public Set<Opinion> getOpiniones() {
+		return opiniones;
+	}
+
+	/**
+	 * @param opiniones the opiniones to set
+	 */
+	public void setOpiniones(Set<Opinion> opiniones) {
+		this.opiniones = opiniones;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Titulo [getIdTitulo()=" + getIdTitulo() + ", "
+				+ (getDsTitulo() != null ? "getDsTitulo()=" + getDsTitulo() + ", " : "")
+				+ (getGenero() != null ? "getGenero()=" + getGenero() + ", " : "")
+				+ (getTlReparto() != null ? "getTlReparto()=" + getTlReparto() + ", " : "")
+				+ (getTlSinopsis() != null ? "getTlSinopsis()=" + getTlSinopsis() + ", " : "")
+				+ (getDsDirector() != null ? "getDsDirector()=" + getDsDirector() + ", " : "")
+				+ (getNmAnyo() != null ? "getNmAnyo()=" + getNmAnyo() : "") + "]";
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dsDirector == null) ? 0 : dsDirector.hashCode());
+		result = prime * result + ((dsTitulo == null) ? 0 : dsTitulo.hashCode());
+		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
+		result = prime * result + idTitulo;
+		result = prime * result + ((nmAnyo == null) ? 0 : nmAnyo.hashCode());
+		result = prime * result + ((tlReparto == null) ? 0 : tlReparto.hashCode());
+		result = prime * result + ((tlSinopsis == null) ? 0 : tlSinopsis.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Titulo))
+			return false;
+		Titulo other = (Titulo) obj;
+	
+		if (idTitulo != other.idTitulo)
+			return false;
+		
+		return true;
+	}
+
+	
+	
 
 	
 }

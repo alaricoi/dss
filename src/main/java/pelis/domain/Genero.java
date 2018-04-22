@@ -45,6 +45,60 @@ public class Genero {
 	public void setDsGenero(String dsGenero) {
 		this.dsGenero = dsGenero;
 	}
+
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Genero [getIdGenero()=" + getIdGenero() + ", "
+				+ (getDsGenero() != null ? "getDsGenero()=" + getDsGenero() + ", " : "") + "hashCode()=" + hashCode()
+				+ "]";
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dsGenero == null) ? 0 : dsGenero.hashCode());
+		result = prime * result + idGenero;
+		result = prime * result + ((titulos == null) ? 0 : titulos.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Genero other = (Genero) obj;
+		if (dsGenero == null) {
+			if (other.dsGenero != null)
+				return false;
+		} else if (!dsGenero.equals(other.dsGenero))
+			return false;
+		if (idGenero != other.idGenero)
+			return false;
+		if (titulos == null) {
+			if (other.titulos != null)
+				return false;
+		} else if (!titulos.equals(other.titulos))
+			return false;
+		return true;
+	}
+
+	
 	
 	
 }
