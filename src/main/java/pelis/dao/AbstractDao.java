@@ -8,6 +8,9 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
  
 public abstract class AbstractDao<PK extends Serializable, T> {
@@ -55,9 +58,50 @@ public abstract class AbstractDao<PK extends Serializable, T> {
     
     @SuppressWarnings("unchecked")
 	public List<T> getAll() {
-        return  getSession().createCriteria(persistentClass).list();
+        return createEntityCriteria().list();
     }
     protected Criteria createEntityCriteria(){
         return getSession().createCriteria(persistentClass);
     }
+    
+    
+    @SuppressWarnings("unchecked")
+	public List<T> find (List<Criterion> filtros, List<Order> orden){
+    	Criteria criteria = createEntityCriteria();
+    	
+    	for (Criterion c : filtros) {
+    		criteria.add(c);
+    	}
+    	
+    	for (Order o : orden) {
+    		criteria.addOrder(o);
+    	}
+		return (List<T>) criteria.list();
+    	
+    }
+    
+    @SuppressWarnings("unchecked")
+	public List<T> find (List<Criterion> filtros, List<Order> orden, int primero, int cuantos){
+    	Criteria criteria = createEntityCriteria();
+    	
+    	for (Criterion c : filtros) {
+    		criteria.add(c);
+    	}
+    	for (Order o : orden) {
+    		criteria.addOrder(o);
+    	}
+    	criteria.setFirstResult(primero);
+    	criteria.setMaxResults(cuantos);
+    	
+		return (List<T>) criteria.list();
+    	
+    }
+     public Long count(List<Criterion> filtros) {
+    	 Criteria criteria = createEntityCriteria();
+     	
+     	for (Criterion c : filtros) {
+     		criteria.add(c);
+     	}
+     	return (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+     }
 }
