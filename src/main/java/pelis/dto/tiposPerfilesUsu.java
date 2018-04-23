@@ -2,8 +2,7 @@ package pelis.dto;
 
 public enum tiposPerfilesUsu {
 	  USER("USER"),
-	    DBA("DBA"),
-	    ADMIN("ADMIN");
+	  ADMIN("ADMIN");
 	     
 	    String tipoPerfil;
 	     

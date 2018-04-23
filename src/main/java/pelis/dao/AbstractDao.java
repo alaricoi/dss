@@ -1,7 +1,6 @@
 package pelis.dao;
 
 import java.io.Serializable;
-
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 

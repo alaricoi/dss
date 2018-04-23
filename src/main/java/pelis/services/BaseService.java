@@ -2,8 +2,8 @@ package pelis.services;
 
 import java.util.List;
 
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 
 
 public interface BaseService <P, E> {

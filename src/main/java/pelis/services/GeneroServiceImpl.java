@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 import pelis.dao.AbstractDao;
 import pelis.dao.GeneroDao;
 import pelis.domain.Genero;
-import pelis.services.BaseServiceImpl;
-import pelis.services.GeneroService;
 
 @Service("generoService")
 public class GeneroServiceImpl  extends BaseServiceImpl<Integer, Genero> 
