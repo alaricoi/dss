@@ -1,6 +1,5 @@
 package pelis.services;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.List;

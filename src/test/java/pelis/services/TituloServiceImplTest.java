@@ -7,7 +7,6 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -61,6 +60,7 @@ public class TituloServiceImplTest extends CustomTest{
 	public void testGetAll() {
 		testSaveOrUpdate();
 		List<Titulo> l = tituloService.getAll();
+		assertNotNull(l);
 	}
 
 	@Test
@@ -105,8 +105,8 @@ public class TituloServiceImplTest extends CustomTest{
 		Integer pk= tituloService.save(t);
 		t.setIdTitulo(pk);
 		Opinion o = crearOpinion(t);
-		
-				
+		assertNotNull(o);
+	    log.info(o.toString());
 		return t;
 	}
 
@@ -134,9 +134,17 @@ public class TituloServiceImplTest extends CustomTest{
 	
 	@Test
 	public void testFindPaginado() {
+		
+	
 		List<Criterion> l = new ArrayList<Criterion>();
 		Criterion c = Restrictions.eq("dsTitulo", "Prueba1");
 	    l.add(c);
+	    
+	    /* para el genero
+	    Criterion child = Restrictions.eq("genero.dsGenero", "Albert");
+	    criteria.createAlias("genero", "genero", CriteriaSpecification.INNER_JOIN);
+	    criteria.add(child);
+	    */
 		List<Titulo> lt = tituloService.find(l, new ArrayList<Order>(),1,3 );
 		assertNotNull("lista vacia", lt);
 		Long count = tituloService.count(l);

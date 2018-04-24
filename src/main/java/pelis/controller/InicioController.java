@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,11 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import pelis.domain.Titulo;
+import pelis.dto.TituloFilter;
 import pelis.services.TituloService;
 
 @Controller
@@ -35,34 +36,54 @@ public class InicioController {
 	@Qualifier("tituloService")
 	TituloService tituloService;
 
-	@RequestMapping(value = "/",method = RequestMethod.GET)
-	public String sayHello(@RequestParam(value = "page", required = false) String parampage, Model model) {
+	@RequestMapping(value ="/", method = { RequestMethod.GET, RequestMethod.POST })
+	public String inicio(@ModelAttribute("tituloFilter") TituloFilter filtro, Model model) {
 
-		model.addAttribute("message", "Nuestras peliculas favoritas " +  getPrincipal()); 
-		
-		 getPrincipal();
+		model.addAttribute("message", "Nuestras peliculas favoritas ");
+
 		List<Criterion> l = new ArrayList<Criterion>();
-		Criterion c = Restrictions.eq("dsTitulo", "Prueba1");
-	    l.add(c);
+		Criterion c;
 		int page = 1;
-        int recordsPerPage = 10;
-		Long total = tituloService.count(l);
-        if(parampage != null)
-            page = Integer.parseInt(parampage);
-     
-        Long noOfRecords = total;
-        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-        
-        // comienzo de la pagina
-        int comienzo = (page-1) * recordsPerPage;
-        		
-		List <Titulo> titulos = tituloService.find(l, new ArrayList<Order>(),comienzo,recordsPerPage);
+		boolean filtrado = false;
+		if (filtro != null) {
+			if (filtro.getCurrentPage() != null)
+				page = filtro.getCurrentPage();
 
-        model.addAttribute("listaPelis", titulos);
-      
-     
-        model.addAttribute("noOfPages", noOfPages);
-        model.addAttribute("currentPage", page);
+          if (filtro.getFiltrado()!=null && filtro.getFiltrado().equals("true")) {
+			if (filtro.getTitulo()!=null && !filtro.getTitulo().equals("")) {
+				c = Restrictions.ilike("dsTitulo", filtro.getTitulo(), MatchMode.ANYWHERE);
+				l.add(c);
+				
+			}
+			if (filtro.getDirector()!= null && !filtro.getDirector().equals("")) {
+				c = Restrictions.ilike("dsDirector", filtro.getDirector(), MatchMode.ANYWHERE);
+				l.add(c);
+			}
+			filtrado = !l.isEmpty();
+          }
+		}
+		//se controla si se filtro o no
+	    model.addAttribute("filtrado", filtrado);
+	    if (filtrado)
+	      model.addAttribute("filtro", filtro);
+		int recordsPerPage = 10;
+		Long total = tituloService.count(l);
+		
+		Long noOfRecords = total;
+		int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+        //Si hay nuevo filtro y el numero de pagina es menor del actual reseteamos las paginas
+		if (noOfPages < page)
+			page = 1;
+		
+		// comienzo de la pagina
+		int comienzo = (page - 1) * recordsPerPage;
+
+		List<Titulo> titulos = tituloService.find(l, new ArrayList<Order>(), comienzo, recordsPerPage);
+
+		model.addAttribute("listaPelis", titulos);
+
+		model.addAttribute("noOfPages", noOfPages);
+		model.addAttribute("currentPage", page);
 		return "inicio";
 
 	}
@@ -76,8 +97,8 @@ public class InicioController {
 	@RequestMapping(value = "/db", method = RequestMethod.GET)
 	public String dbaPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
-	     model.addAttribute("listaPelis", tituloService.getAll());
-		
+		model.addAttribute("listaPelis", tituloService.getAll());
+
 		return "dba";
 	}
 
