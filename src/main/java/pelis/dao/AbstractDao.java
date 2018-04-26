@@ -62,6 +62,8 @@ public abstract class AbstractDao<P extends Serializable, T> {
         return getSession().createCriteria(persistentClass);
     }
     
+   
+    
     
     @SuppressWarnings("unchecked")
 	public List<T> find (List<Criterion> filtros, List<Order> orden){

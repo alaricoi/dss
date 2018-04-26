@@ -1,11 +1,16 @@
 package pelis.dao;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.internal.CriteriaImpl;
 import org.springframework.stereotype.Repository;
 
 import pelis.domain.Titulo;
 @Repository("tituloDao")
+
 public class TituloDaoImpl extends AbstractDao<Integer, Titulo> implements TituloDao {
 
 	/* (non-Javadoc)
@@ -19,5 +24,16 @@ public class TituloDaoImpl extends AbstractDao<Integer, Titulo> implements Titul
 		return c;
 	}
    
-	
+	 /**
+     *  trae tambien los campos lezy definidos en la creacion del criteria
+     * @param key
+     * @return
+     */
+    public Titulo find (Integer key) {
+    	Criteria criteria = createEntityCriteria();
+    	criteria.add(Restrictions.eq("idTitulo", key));
+    	
+    	return (Titulo) criteria.uniqueResult();
+    	
+    }
 }
