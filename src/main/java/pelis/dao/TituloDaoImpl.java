@@ -1,11 +1,8 @@
 package pelis.dao;
 
-import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.internal.CriteriaImpl;
 import org.springframework.stereotype.Repository;
 
 import pelis.domain.Titulo;

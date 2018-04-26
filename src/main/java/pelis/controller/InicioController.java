@@ -96,9 +96,9 @@ public class InicioController {
 		model.addAttribute("currentPage", page);
 		
 	    String uri = request.getRequestURI();
-	    if (uri.equals("/"))
-	    	return "inicio";
-	    	else return "admin/titulos";
+	    if (uri.equals("admin/titulos"))
+	    	return "admin/titulos";
+	    else return "inicio";
 
 	}
 
