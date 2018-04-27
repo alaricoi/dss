@@ -48,12 +48,12 @@ public class InicioController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = { "/","admin/titulos"} , method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = { "/","admin",} , method = { RequestMethod.GET, RequestMethod.POST })
 	public String inicio(@ModelAttribute("tituloFilter") TituloFilter filtro,
 			HttpServletRequest request,
 			Model model) {
-
-		model.addAttribute("message", "Nuestras peliculas favoritas ");
+		model.addAttribute("user", getPrincipal());
+		model.addAttribute("message", "Nuestras películas favoritas ");
 
 		List<Criterion> l = new ArrayList<Criterion>();
 		Criterion c;
@@ -94,20 +94,11 @@ public class InicioController {
 
 		model.addAttribute("noOfPages", noOfPages);
 		model.addAttribute("currentPage", page);
-		
-	    String uri = request.getRequestURI();
-	    if (uri.equals("admin/titulos"))
-	    	return "admin/titulos";
-	    else return "inicio";
+	   return "inicio";
 
 	}
 
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String adminPage(ModelMap model) {
-		model.addAttribute("user", getPrincipal());
-		return "admin";
-	}
-
+	
 	@RequestMapping(value = "/db", method = RequestMethod.GET)
 	public String dbaPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
@@ -134,7 +125,7 @@ public class InicioController {
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "redirect:/login?logout";
+		return "redirect:/?logout";
 	}
 
 	@RequestMapping(value = "/titulo/{id}", method = RequestMethod.GET)

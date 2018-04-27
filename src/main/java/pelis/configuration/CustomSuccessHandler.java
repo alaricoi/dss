@@ -20,10 +20,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 	
-	 private final Log log = LogFactory.getLog(getClass());
+	
+
+	private final Log log = LogFactory.getLog(getClass());
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-     
+  
 	    @Override
 	    protected void handle(HttpServletRequest request, 
 	      HttpServletResponse response, Authentication authentication) throws IOException {
@@ -33,10 +35,10 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 	        	log.error("Can't redirect");
 	            return;
 	        }
-	  
+	   
 	        redirectStrategy.sendRedirect(request, response, targetUrl);
 	    }
-	     
+	
 	    protected String determineTargetUrl(Authentication authentication) {
 	        String url="";
 	         
