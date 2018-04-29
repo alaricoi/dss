@@ -9,24 +9,25 @@ import pelis.dao.GeneroDao;
 import pelis.domain.Genero;
 
 @Service("generoService")
-public class GeneroServiceImpl  extends BaseServiceImpl<Integer, Genero> 
-         implements GeneroService{
-	 private GeneroDao generoDao;
-	 
-	    public GeneroServiceImpl(){
-	 
-	    }
-	    @Autowired
-	    public GeneroServiceImpl(
-	            @Qualifier("generoDao") AbstractDao<Integer, Genero> genericDao) {
-	        super(genericDao);
-	        this.setGeneroDao((GeneroDao) genericDao);
-	    }
-		public GeneroDao getGeneroDao() {
-			return generoDao;
-		}
-		public void setGeneroDao(GeneroDao generoDao) {
-			this.generoDao = generoDao;
-		}
-	 
+public class GeneroServiceImpl extends BaseServiceImpl<Integer, Genero> implements GeneroService {
+	private GeneroDao generoDao;
+
+	public GeneroServiceImpl() {
+
+	}
+
+	@Autowired
+	public GeneroServiceImpl(@Qualifier("generoDao") AbstractDao<Integer, Genero> genericDao) {
+		super(genericDao);
+		this.setGeneroDao((GeneroDao) genericDao);
+	}
+
+	public GeneroDao getGeneroDao() {
+		return generoDao;
+	}
+
+	public void setGeneroDao(GeneroDao generoDao) {
+		this.generoDao = generoDao;
+	}
+
 }

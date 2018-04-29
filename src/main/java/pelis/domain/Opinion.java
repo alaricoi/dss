@@ -1,4 +1,9 @@
 package pelis.domain;
+/**
+ * @author Isma
+ *
+ */
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,31 +16,45 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="OPINIONES")
+@Table(name = "OPINIONES")
 public class Opinion {
 
-	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID_OPINION", nullable=false, unique=true)
-	 private int idOpinion;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_OPINION", nullable = false, unique = true)
+	private int idOpinion;
 
-	@Column(name="TL_OPINION", nullable=false)
-	 private String tlOpinion;
-	
+	@Column(name = "TL_OPINION", nullable = false)
+	private String tlOpinion;
 
-	@Column(name="NM_OPINION", nullable=false)
-	 private Integer nmOpinion;
-	
+	@Column(name = "NM_OPINION", nullable = false)
+	private Integer nmOpinion;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_TITULO", nullable = false)
 	private Titulo titulo;
-	
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "app_user_id", nullable = false)
 	private User user;
 
+	@Column(name = "FC_ALTA")
+	private Date fcAlta;
+
+	/**
+	 * @return the fcAlta
+	 */
+	public Date getFcAlta() {
+		return this.fcAlta;
+	}
+
+	/**
+	 * @param fcAlta
+	 *            the fcAlta to set
+	 */
+	public void setFcAlta(Date fcAlta) {
+		this.fcAlta = fcAlta;
+	}
 
 	/**
 	 * @return the idOpinion
@@ -44,14 +63,13 @@ public class Opinion {
 		return idOpinion;
 	}
 
-
 	/**
-	 * @param idOpinion the idOpinion to set
+	 * @param idOpinion
+	 *            the idOpinion to set
 	 */
 	public void setIdOpinion(int idOpinion) {
 		this.idOpinion = idOpinion;
 	}
-
 
 	/**
 	 * @return the tlOpinion
@@ -60,14 +78,13 @@ public class Opinion {
 		return tlOpinion;
 	}
 
-
 	/**
-	 * @param tlOpinion the tlOpinion to set
+	 * @param tlOpinion
+	 *            the tlOpinion to set
 	 */
 	public void setTlOpinion(String tlOpinion) {
 		this.tlOpinion = tlOpinion;
 	}
-
 
 	/**
 	 * @return the nmOpinion
@@ -76,14 +93,13 @@ public class Opinion {
 		return nmOpinion;
 	}
 
-
 	/**
-	 * @param nmOpinion the nmOpinion to set
+	 * @param nmOpinion
+	 *            the nmOpinion to set
 	 */
 	public void setNmOpinion(Integer nmOpinion) {
 		this.nmOpinion = nmOpinion;
 	}
-
 
 	/**
 	 * @return the titulo
@@ -92,14 +108,13 @@ public class Opinion {
 		return titulo;
 	}
 
-
 	/**
-	 * @param titulo the titulo to set
+	 * @param titulo
+	 *            the titulo to set
 	 */
 	public void setTitulo(Titulo titulo) {
 		this.titulo = titulo;
 	}
-
 
 	/**
 	 * @return the user
@@ -108,16 +123,17 @@ public class Opinion {
 		return user;
 	}
 
-
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -126,11 +142,13 @@ public class Opinion {
 				+ (getTlOpinion() != null ? "getTlOpinion()=" + getTlOpinion() + ", " : "")
 				+ (getNmOpinion() != null ? "getNmOpinion()=" + getNmOpinion() + ", " : "")
 				+ (getTitulo() != null ? "getTitulo()=" + getTitulo() + ", " : "")
+				+ (getFcAlta() != null ? "getFcAlta()=" + getFcAlta() + ", " : "")
 				+ (getUser() != null ? "getUser()=" + getUser() : "") + "]";
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -141,8 +159,9 @@ public class Opinion {
 		return result;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -151,12 +170,12 @@ public class Opinion {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Opinion))
+		if (this.getClass() == obj.getClass()) {
+			Opinion other = (Opinion) obj;
+			return (idOpinion != other.idOpinion);
+		} else {
 			return false;
-		Opinion other = (Opinion) obj;
-		return (idOpinion != other.idOpinion);
+		}
 	}
-	
-	
-	
+
 }

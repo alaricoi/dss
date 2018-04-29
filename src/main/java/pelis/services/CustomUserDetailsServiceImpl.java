@@ -17,17 +17,20 @@ import org.springframework.transaction.annotation.Transactional;
 import pelis.domain.User;
 import pelis.domain.UserProfile;
 
+/**
+ * @author Isma
+ *
+ */
 @Service("miUserDetailsService")
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
-	
-	 private final Log log = LogFactory.getLog(getClass());
-	 
+
+	private static final Log log = LogFactory.getLog(CustomUserDetailsServiceImpl.class);
+
 	@Autowired
 	private UserService userService;
 
-	
 	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String ssoId)  {
+	public UserDetails loadUserByUsername(String ssoId) {
 		User user = userService.findBySso(ssoId);
 		log.debug("User : " + user);
 		if (user == null) {

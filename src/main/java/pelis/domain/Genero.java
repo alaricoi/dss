@@ -13,25 +13,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="GENEROS")
+@Table(name = "GENEROS")
 public class Genero {
-	
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID_GENERO", nullable=false, unique=true)
-	 private int idGenero;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_GENERO", nullable = false, unique = true)
+	private int idGenero;
 
-	@Column(name="DS_GENERO", nullable=false)
-	 private String dsGenero;
-	
+	@Column(name = "DS_GENERO", nullable = false)
+	private String dsGenero;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "genero")
-	private Set<Titulo> titulos = new HashSet<Titulo>(
-			0);
+	private Set<Titulo> titulos = new HashSet<Titulo>(0);
 
-	
 	public int getIdGenero() {
-		return idGenero;
+		return this.idGenero;
 	}
 
 	public void setIdGenero(int idGenero) {
@@ -39,16 +36,16 @@ public class Genero {
 	}
 
 	public String getDsGenero() {
-		return dsGenero;
+		return this.dsGenero;
 	}
 
 	public void setDsGenero(String dsGenero) {
 		this.dsGenero = dsGenero;
 	}
 
-	
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -58,7 +55,9 @@ public class Genero {
 				+ "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -71,7 +70,9 @@ public class Genero {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -98,7 +99,4 @@ public class Genero {
 		return true;
 	}
 
-	
-	
-	
 }

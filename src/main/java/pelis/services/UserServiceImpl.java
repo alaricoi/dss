@@ -1,5 +1,9 @@
 package pelis.services;
 
+/**
+ * @author Isma
+ *
+ */
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;

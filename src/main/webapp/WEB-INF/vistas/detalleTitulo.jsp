@@ -10,20 +10,29 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Película</title>
-
-<link href="<c:url value='/resources/css/bootstrap.css' />"
-	rel="stylesheet"></link>
-
-<link rel="stylesheet" type="text/css"
-	href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+
 	<div id="container">
 	<div class="page-header center">
 			<h2>${titulo.dsTitulo}</h2>
 		</div>
-	
+	<ul class="nav nav-pills">
+<sec:authorize access="isAnonymous()">
+
+         <li role="presentation"><a href="<c:url value="/login.htm"/>">Login</a></li>
+    </sec:authorize>
+    <sec:authorize access="isAuthenticated()">
+
+        <li  role="presentation"><a href="<c:url value="/logout" />">Salir</a></li>
+    </sec:authorize>
+     <li  role="presentation"><a href="<c:url value="/" />">Volver</a></li>
+</ul>
 		<dl class="dl-horizontal">
 			<dt>Director</dt>
 			<dd>${titulo.dsDirector}</dd>
@@ -31,7 +40,33 @@
 			<dd>${titulo.nmAnyo}</dd>
 			<dt>Genero</dt>
 			<dd>${titulo.genero.dsGenero}</dd>
+			<dt>Sinopsis</dt>
+			<dd>${titulo.tlSinopsis}</dd>
+			<dt>Repato</dt>
+			<dd>${titulo.tlReparto}</dd>
 		</dl>
 	</div>
+	
+	<c:choose>
+	
+		<c:when test="${not empty opiniones}">
+			<h3>Opiniones</h3>
+		<c:forEach var="opinion" items="${opiniones}">
+		<dl class="dl-horizontal">
+		<dt>usuario</dt>
+		  <dd>${opinion.user.email}</dd>
+		<dt>valoracion</dt>
+		  <dd>${opinion.nmOpinion}</dd>
+		 <dt>texto</dt>
+		  <dd>${opinion.tlOpinion}</dd>
+		  </dl>
+		</c:forEach>
+		
+		</c:when>
+		<c:otherwise>
+		  			<h3>Sin Opiniones</h3>
+		</c:otherwise>
+	</c:choose>
+
 </body>
 </html>

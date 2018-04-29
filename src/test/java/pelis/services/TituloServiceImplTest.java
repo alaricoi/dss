@@ -129,6 +129,8 @@ public class TituloServiceImplTest extends CustomTest{
 		log.info("Encontrados " + lt.size());
 		log.info("El contador es:" + tituloService.count(l));
 		
+		Titulo t = tituloService.find(lt.get(0).getIdTitulo());
+		
 		
 	}
 	

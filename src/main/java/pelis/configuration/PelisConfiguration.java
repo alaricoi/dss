@@ -15,20 +15,21 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = "pelis")
 public class PelisConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/vistas/");
-        viewResolver.setSuffix(".jsp");
- 
-        return viewResolver;
-    }
- 
-     /*
-     * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
-     */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-    }
+	public ViewResolver viewResolver() {
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		viewResolver.setViewClass(JstlView.class);
+		viewResolver.setPrefix("/WEB-INF/vistas/");
+		viewResolver.setSuffix(".jsp");
+
+		return viewResolver;
+	}
+
+	/*
+	 * Configure ResourceHandlers to serve static resources like CSS/ Javascript
+	 * etc...
+	 */
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
 }

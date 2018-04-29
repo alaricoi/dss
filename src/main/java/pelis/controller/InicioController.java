@@ -22,7 +22,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,26 +31,24 @@ import pelis.services.TituloService;
 
 @Controller
 public class InicioController {
-	private final Log log = LogFactory.getLog(getClass());
+	private static final Log log = LogFactory.getLog(InicioController.class);
 
 	@Autowired
 	@Qualifier("tituloService")
-	TituloService tituloService;
+	private TituloService tituloService;
 
 	/**
-	 * Carga inicialmente la lista de titulos. Si se llama a la uri
-	 *  admin/titulos mostrará la lista de titulos para el mantenimiento
-	 *  por configuración de springSecurity  delegamos el control de acceso 
-	 *  a dicha uri
+	 * Carga inicialmente la lista de titulos. Si se llama a la uri admin/titulos
+	 * mostrará la lista de titulos para el mantenimiento por configuración de
+	 * springSecurity delegamos el control de acceso a dicha uri
+	 * 
 	 * @param filtro
 	 * @param request
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = { "/","admin",} , method = { RequestMethod.GET, RequestMethod.POST })
-	public String inicio(@ModelAttribute("tituloFilter") TituloFilter filtro,
-			HttpServletRequest request,
-			Model model) {
+	@RequestMapping(value = { "/", "admin", }, method = { RequestMethod.GET, RequestMethod.POST })
+	public String inicio(@ModelAttribute("tituloFilter") TituloFilter filtro, HttpServletRequest request, Model model) {
 		model.addAttribute("user", getPrincipal());
 		model.addAttribute("message", "Nuestras películas favoritas ");
 
@@ -73,7 +70,7 @@ public class InicioController {
 			}
 
 		}
-  
+
 		model.addAttribute("filtro", filtro);
 		int recordsPerPage = 10;
 		Long total = tituloService.count(l);
@@ -94,11 +91,10 @@ public class InicioController {
 
 		model.addAttribute("noOfPages", noOfPages);
 		model.addAttribute("currentPage", page);
-	   return "inicio";
+		return "inicio";
 
 	}
 
-	
 	@RequestMapping(value = "/db", method = RequestMethod.GET)
 	public String dbaPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
@@ -128,14 +124,6 @@ public class InicioController {
 		return "redirect:/?logout";
 	}
 
-	@RequestMapping(value = "/titulo/{id}", method = RequestMethod.GET)
-	public String detalleTitulo(@PathVariable("id") Integer id, Model model) {
-		
-		Titulo titulo = tituloService.find(id);
-		model.addAttribute(titulo);
-		return "detalleTitulo";
-	}
-	
 	private String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

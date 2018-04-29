@@ -14,12 +14,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * @author Isma
+ *
+ */
 @Entity
 @Table(name = "TITULOS")
 public class Titulo {
-	 @Id
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID_TITULO", nullable=false, unique=true)
+	@Column(name = "ID_TITULO", nullable = false, unique = true)
 	private int idTitulo;
 
 	@Column(name = "DS_TITULO", nullable = false)
@@ -28,21 +32,21 @@ public class Titulo {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_GENERO", nullable = false)
 	private Genero genero;
-	
+
 	@Column(name = "TL_REPARTO")
 	private String tlReparto;
 	@Column(name = "TL_SINOPSIS")
 	private String tlSinopsis;
-	
+
 	@Column(name = "DS_DIRECTOR")
 	private String dsDirector;
-	
+
 	@Column(name = "NM_ANYO")
 	private Integer nmAnyo;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "titulo")
 	private Set<Opinion> opiniones = new HashSet<Opinion>(0);
-	
+
 	public int getIdTitulo() {
 		return idTitulo;
 	}
@@ -99,8 +103,6 @@ public class Titulo {
 		this.nmAnyo = nmAnyo;
 	}
 
-	
-	
 	/**
 	 * @return the opiniones
 	 */
@@ -109,13 +111,16 @@ public class Titulo {
 	}
 
 	/**
-	 * @param opiniones the opiniones to set
+	 * @param opiniones
+	 *            the opiniones to set
 	 */
 	public void setOpiniones(Set<Opinion> opiniones) {
 		this.opiniones = opiniones;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -129,7 +134,9 @@ public class Titulo {
 				+ (getNmAnyo() != null ? "getNmAnyo()=" + getNmAnyo() : "") + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -146,7 +153,9 @@ public class Titulo {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -155,16 +164,13 @@ public class Titulo {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Titulo))
+		if (this.getClass() == obj.getClass()) {
+			Titulo other = (Titulo) obj;
+
+			return (idTitulo != other.idTitulo);
+		} else {
 			return false;
-		Titulo other = (Titulo) obj;
-	
-		return (idTitulo != other.idTitulo);
-	
+		}
 	}
 
-	
-	
-
-	
 }

@@ -4,6 +4,6 @@ import pelis.domain.User;
 
 public interface UserService {
 	User findById(int id);
-    
-    User findBySso(String sso);
+
+	User findBySso(String sso);
 }
