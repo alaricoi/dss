@@ -14,20 +14,19 @@ import pelis.domain.Opinion;
 
 @Service("opinionService")
 public class OpinionServiceImpl extends BaseServiceImpl<Integer, Opinion> implements OpinionService {
+	
+	@Autowired
+	@Qualifier("opinionDao")
 	private OpinionDao dao;
 
 	public OpinionServiceImpl() {
 
 	}
 
-	@Autowired
-	public OpinionServiceImpl(@Qualifier("opinionDao") AbstractDao<Integer, Opinion> genericDao) {
-		super(genericDao);
-		this.setDao((OpinionDao) genericDao);
-	}
-
-	public OpinionDao getDao() {
-		return dao;
+	
+	@Override
+	public AbstractDao<Integer, Opinion> getDao() {
+		return (AbstractDao<Integer, Opinion>) dao;
 	}
 
 	public void setDao(OpinionDao dao) {

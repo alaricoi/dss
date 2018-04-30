@@ -17,27 +17,29 @@ import pelis.domain.Titulo;
 @Service("tituloService")
 
 public class TituloServiceImpl extends BaseServiceImpl<Integer, Titulo> implements TituloService {
-
+	@Autowired
+	@Qualifier("tituloDao")
 	private TituloDao dao;
 
-	@Autowired
-	public TituloServiceImpl(@Qualifier("tituloDao") AbstractDao<Integer, Titulo> genericDao) {
-		super(genericDao);
-		this.setDao((TituloDao) genericDao);
+	public TituloServiceImpl() {
+		
 	}
-
-	public TituloDao getDao() {
-		return dao;
+	@Override
+	public AbstractDao<Integer, Titulo> getDao() {
+		return (AbstractDao<Integer, Titulo>) dao;
 	}
 
 	public void setDao(TituloDao dao) {
 		this.dao = dao;
 	}
 
+	/**
+	 * Metodo que devuelve un objeto de dominio a partir de una clave
+	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public Titulo find(Integer key) {
 
-		return getDao().find(key);
+		return dao.find(key);
 	}
 
 }

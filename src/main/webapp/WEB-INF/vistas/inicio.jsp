@@ -10,7 +10,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nuestras Películas favoritas</title>
-<!-- Latest compiled and minified CSS -->
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -95,6 +95,7 @@
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered" id="t_titulos"
 						style="width: 100%">
+						  <caption>Nuestras Pelis</caption>
 						<thead>
 							<tr>
 								<th>Titulo</th>

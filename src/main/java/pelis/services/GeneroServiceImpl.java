@@ -7,27 +7,34 @@ import org.springframework.stereotype.Service;
 import pelis.dao.AbstractDao;
 import pelis.dao.GeneroDao;
 import pelis.domain.Genero;
+import javax.annotation.PostConstruct;
 
 @Service("generoService")
 public class GeneroServiceImpl extends BaseServiceImpl<Integer, Genero> implements GeneroService {
-	private GeneroDao generoDao;
-
+	
+	@Autowired
+	@Qualifier("generoDao") 
+	private GeneroDao dao;
+/**
+ * constructor sin parametros
+ */
 	public GeneroServiceImpl() {
 
 	}
 
-	@Autowired
-	public GeneroServiceImpl(@Qualifier("generoDao") AbstractDao<Integer, Genero> genericDao) {
-		super(genericDao);
-		this.setGeneroDao((GeneroDao) genericDao);
+	@PostConstruct
+	public void init() {
+		super.setDao((AbstractDao<Integer, Genero>) dao);
 	}
+	
+
 
 	public GeneroDao getGeneroDao() {
-		return generoDao;
+		return dao;
 	}
 
 	public void setGeneroDao(GeneroDao generoDao) {
-		this.generoDao = generoDao;
+		this.dao = generoDao;
 	}
 
 }

@@ -13,8 +13,19 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "pelis")
-public class PelisConfiguration extends WebMvcConfigurerAdapter {
+/**
+ * 
+ * @author Isma
+ *
+ */
+public class PelisConfiguration extends WebMvcConfigurerAdapter 
+{
 	@Bean
+	/**
+	 * Definición de la carpeta raiz de las paginas jsp y su sufijo
+	 * @return
+	 */
+	
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setViewClass(JstlView.class);
@@ -24,11 +35,11 @@ public class PelisConfiguration extends WebMvcConfigurerAdapter {
 		return viewResolver;
 	}
 
-	/*
-	 * Configure ResourceHandlers to serve static resources like CSS/ Javascript
-	 * etc...
-	 */
+	
 	@Override
+	/**
+	 * Acceso a los recursos estaticos
+	 */
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}

@@ -28,13 +28,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/", "/home").permitAll().antMatchers("/admin/**")
-				.access("hasRole('ADMIN')")
-				// .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
-				// .and().formLogin().loginPage("/login")
-				.and().formLogin().loginPage("/login").successHandler(customSuccessHandler).usernameParameter("ssoId")
-				.passwordParameter("password").and().csrf().and().exceptionHandling()
+	    //configuramos el acceso a la parte pública
+		http.authorizeRequests().antMatchers("/", "/home").permitAll().
+		         // todas las URI a partir de /admin/ solo estan autorizadas
+				// al rol ADMIN
+		         antMatchers("/admin/**").access("hasRole('ADMIN')")
+				//Formulario de login y asignación de la clase que controlara la atenticación
+				// debemos indicar también que que parametros son el login y la contraseña
+				.and().formLogin().loginPage("/login").
+				successHandler(customSuccessHandler).usernameParameter("ssoId")
+				.passwordParameter("password").
+				// activación del control CSRF
+				and().csrf()
+				.and().exceptionHandling()
 				.accessDeniedPage("/Access_Denied");
+				
 
 	}
 }

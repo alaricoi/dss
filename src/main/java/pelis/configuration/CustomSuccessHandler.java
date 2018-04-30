@@ -1,3 +1,6 @@
+/**
+ * Práctica de Desarrollo de software Seguro
+ */
 package pelis.configuration;
 
 import java.io.IOException;
@@ -16,27 +19,45 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-
+/**
+ * Clase para redireccionar la entrada a usuarios logados
+ * @author Isma
+ *
+ */
 @Component
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-	private final Log log = LogFactory.getLog(getClass());
+	/**
+	 * propiedad para gestionar el log de la aplicación
+	 */
+	private static final Log LOGGER = LogFactory.getLog(CustomSuccessHandler.class);
 
+	/**
+	 * propiedad para gestionar la estrategia de redirección
+	 */
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
+	/**
+	 * Metodo heredado que se encarga de la gestión de la redirección
+	 */
 	@Override
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException {
 		String targetUrl = determineTargetUrl(authentication);
 
 		if (response.isCommitted()) {
-			log.error("Can't redirect");
+			LOGGER.error("Can't redirect");
 			return;
 		}
 
 		redirectStrategy.sendRedirect(request, response, targetUrl);
 	}
-
+/**
+ *  
+ * @param authentication objeto que nos proporciona el objeto con los datos
+ * de la autenticación
+ * @return dirección a la que correspodera ir dependiendo del rol de usuario
+ */
 	protected String determineTargetUrl(Authentication authentication) {
 		String url = "";
 
@@ -65,15 +86,26 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 	}
 
 	@Override
+	/**
+	 * 
+	 */
 	protected RedirectStrategy getRedirectStrategy() {
 		return redirectStrategy;
 	}
-
+/**
+ * 
+ * @param roles
+ * @return
+ */
 	private boolean isUser(List<String> roles) {
 		return (roles.contains("ROLE_USER"));
 
 	}
-
+/**
+ * 
+ * @param roles
+ * @return
+ */
 	private boolean isAdmin(List<String> roles) {
 		return (roles.contains("ROLE_ADMIN"));
 	}
