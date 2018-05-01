@@ -10,10 +10,10 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<springframework.version>4.1.6.RELEASE</springframework.version>
-		<springsecurity.version>4.0.1.RELEASE</springsecurity.version>
+		<springframework.version>4.3.16.RELEASE</springframework.version>
+		<springsecurity.version>4.2.5.RELEASE</springsecurity.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
-		<mysql.connector.version>5.1.31</mysql.connector.version>
+		<mysql.connector.version>8.0.11</mysql.connector.version>
 
 		<surefire.version>2.17</surefire.version>
 		<jacoco.version>0.8.1</jacoco.version>
@@ -116,6 +116,13 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.owasp</groupId>
+			<artifactId>dependency-check-maven</artifactId>
+			<version>3.1.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -168,12 +175,48 @@
 				</executions>
 			</plugin>
 
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>3.1.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				
+			</plugin>
 
 
 		</plugins>
 
 		<finalName>pelis</finalName>
 	</build>
+	
+	 <reporting>
+     
+        <plugins>
+     
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>3.1.2</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+          
+        </plugins>
+    
+    </reporting>
+ 
+	
 </project>
       
 
