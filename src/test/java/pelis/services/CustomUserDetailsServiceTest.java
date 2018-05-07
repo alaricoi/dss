@@ -17,6 +17,9 @@ public class CustomUserDetailsServiceTest extends CustomTest{
     @Qualifier("miUserDetailsService")
     UserDetailsService userDetailsService;
 	
+	
+	
+	
 	@Test
 	public void testLoadUserByUsername() {
 		UserDetails u = userDetailsService.loadUserByUsername("isma");

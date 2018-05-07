@@ -121,15 +121,16 @@ public class TituloServiceImplTest extends CustomTest{
 	
 	@Test
 	public void testFind() {
+		Titulo t = creaTitulo();
 		List<Criterion> l = new ArrayList<Criterion>();
-		Criterion c = Restrictions.eq("dsTitulo", "Otra prueba");
+		Criterion c = Restrictions.eq("dsTitulo", t.getDsTitulo());
 	    l.add(c);
 		List<Titulo> lt = tituloService.find(l, new ArrayList<Order>() );
 		assertNotNull("lista vacia", lt);
 		log.info("Encontrados " + lt.size());
 		log.info("El contador es:" + tituloService.count(l));
 		
-		Titulo t = tituloService.find(lt.get(0).getIdTitulo());
+	    t = tituloService.find(lt.get(0).getIdTitulo());
 		
 		
 	}

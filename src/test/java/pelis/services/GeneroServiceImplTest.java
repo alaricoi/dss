@@ -1,7 +1,7 @@
 package pelis.services;
 
 import static org.junit.Assert.fail;
-
+import static org.junit.Assert.assertNotNull;
 import java.util.List;
 
 import org.junit.Before;
@@ -38,6 +38,7 @@ public class GeneroServiceImplTest extends CustomTest{
 		g.setDsGenero("Prueba1");
 		generoService.save(g);
 		List<Genero> l = generoService.getAll();
+		assertNotNull("Objeto Nulo", l);
 	}
 
 	@Test
@@ -65,6 +66,7 @@ public class GeneroServiceImplTest extends CustomTest{
 		Genero g = new Genero();
 		g.setDsGenero("Prueba1");
 		Integer pk= generoService.save(g);
+		assertNotNull("No encontrado", pk);
 	}
 
 	@Test

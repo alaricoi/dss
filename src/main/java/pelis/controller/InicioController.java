@@ -12,6 +12,13 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.owasp.esapi.ESAPI;
+import org.owasp.esapi.Encoder;
+import org.owasp.esapi.codecs.Codec;
+import org.owasp.esapi.codecs.HTMLEntityCodec;
+import org.owasp.esapi.codecs.JavaScriptCodec;
+import org.owasp.esapi.codecs.MySQLCodec;
+import org.owasp.esapi.reference.DefaultEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -28,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pelis.domain.Titulo;
 import pelis.dto.TituloFilter;
 import pelis.services.TituloService;
+import pelis.util.Util;
 
 @Controller
 public class InicioController {
@@ -52,20 +60,26 @@ public class InicioController {
 		model.addAttribute("user", getPrincipal());
 		model.addAttribute("message", "Nuestras películas favoritas ");
 
+		
+		
+
 		List<Criterion> l = new ArrayList<Criterion>();
 		Criterion c;
 		int page = 1;
 		if (filtro != null) {
 			if (filtro.getCurrentPage() != null)
 				page = filtro.getCurrentPage();
-
+			
+			String tituloSaneado = Util.escapeESAPI(filtro.getTitulo());
+			String directorSaneado = Util.escapeESAPI(filtro.getDirector());
 			if (filtro.getTitulo() != null && !filtro.getTitulo().equals("")) {
-				c = Restrictions.ilike("dsTitulo", filtro.getTitulo(), MatchMode.ANYWHERE);
+				c = Restrictions.ilike("dsTitulo", 
+						tituloSaneado, MatchMode.ANYWHERE);
 				l.add(c);
 
 			}
 			if (filtro.getDirector() != null && !filtro.getDirector().equals("")) {
-				c = Restrictions.ilike("dsDirector", filtro.getDirector(), MatchMode.ANYWHERE);
+				c = Restrictions.ilike("dsDirector", directorSaneado, MatchMode.ANYWHERE);
 				l.add(c);
 			}
 

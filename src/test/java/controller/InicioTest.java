@@ -10,13 +10,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import pelis.TestConfiguration;
 import pelis.configuration.PelisConfiguration;
 import pelis.controller.InicioController;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 
-@ContextConfiguration(classes = {PelisConfiguration.class})
+@ContextConfiguration(classes = {PelisConfiguration.class, TestConfiguration.class})
 @TransactionConfiguration(defaultRollback = true)
 @Transactional
 @WebAppConfiguration
