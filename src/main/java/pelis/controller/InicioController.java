@@ -12,13 +12,6 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.owasp.esapi.ESAPI;
-import org.owasp.esapi.Encoder;
-import org.owasp.esapi.codecs.Codec;
-import org.owasp.esapi.codecs.HTMLEntityCodec;
-import org.owasp.esapi.codecs.JavaScriptCodec;
-import org.owasp.esapi.codecs.MySQLCodec;
-import org.owasp.esapi.reference.DefaultEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -55,7 +48,7 @@ public class InicioController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = { "/", "admin", }, method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = { "/", "admin"}, method = { RequestMethod.GET, RequestMethod.POST })
 	public String inicio(@ModelAttribute("tituloFilter") TituloFilter filtro, HttpServletRequest request, Model model) {
 		model.addAttribute("user", getPrincipal());
 		model.addAttribute("message", "Nuestras películas favoritas ");

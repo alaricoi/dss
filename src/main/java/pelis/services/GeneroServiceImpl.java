@@ -1,5 +1,7 @@
 package pelis.services;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -7,7 +9,6 @@ import org.springframework.stereotype.Service;
 import pelis.dao.AbstractDao;
 import pelis.dao.GeneroDao;
 import pelis.domain.Genero;
-import javax.annotation.PostConstruct;
 
 @Service("generoService")
 public class GeneroServiceImpl extends BaseServiceImpl<Integer, Genero> implements GeneroService {

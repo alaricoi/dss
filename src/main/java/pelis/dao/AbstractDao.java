@@ -40,18 +40,22 @@ public abstract class AbstractDao<P extends Serializable, T> {
 
 	public Integer save(T entity) {
 		return (Integer) getSession().save(entity);
+		
 	}
 
 	public void update(T entity) {
 		getSession().update(entity);
+		
 	}
 
 	public void saveOrUpdate(T entity) {
 		getSession().saveOrUpdate(entity);
+
 	}
 
 	public void delete(T entity) {
 		getSession().delete(entity);
+
 	}
 
 	@SuppressWarnings("unchecked")

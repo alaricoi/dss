@@ -91,11 +91,7 @@ public class Genero {
 			return false;
 		if (idGenero != other.idGenero)
 			return false;
-		if (titulos == null) {
-			if (other.titulos != null)
-				return false;
-		} else if (!titulos.equals(other.titulos))
-			return false;
+		
 		return true;
 	}
 
