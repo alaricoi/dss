@@ -22,13 +22,13 @@ public class UserServiceImplTest extends CustomTest {
 	public void testFindById() {
 	
 		User u = userService.findById(1);
-		assertNotNull(u);
+		assertNotNull("usuario nulo",u);
 	}
 
 	@Test
 	public void testFindBySso() {
 		 User u = userService.findBySso("bill");
-		 assertNotNull(u);
+		 assertNotNull("usuario nulo",u);
 	
 	}
 

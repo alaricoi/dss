@@ -19,10 +19,7 @@ public class OpinionServiceImpl extends BaseServiceImpl<Integer, Opinion> implem
 	@Qualifier("opinionDao")
 	private OpinionDao dao;
 
-	public OpinionServiceImpl() {
-
-	}
-
+	
 	
 	@Override
 	public AbstractDao<Integer, Opinion> getDao() {

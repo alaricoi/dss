@@ -2,6 +2,7 @@ package pelis.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class TituloServiceImplTest extends CustomTest{
 	public void testGetAll() {
 		testSaveOrUpdate();
 		List<Titulo> l = tituloService.getAll();
-		assertNotNull(l);
+		assertNotNull("la lista es nula", l);
 	}
 
 	@Test
@@ -73,6 +74,7 @@ public class TituloServiceImplTest extends CustomTest{
 		t.setIdTitulo(pk);
 		t.setDsTitulo("Otra prueba");
 		tituloService.update(t);
+		assertTrue("test completado", true);
 		
 	}
 
@@ -105,7 +107,7 @@ public class TituloServiceImplTest extends CustomTest{
 		Integer pk= tituloService.save(t);
 		t.setIdTitulo(pk);
 		Opinion o = crearOpinion(t);
-		assertNotNull(o);
+		assertNotNull("opnion no creada",o);
 	    log.info(o.toString());
 		return t;
 	}
@@ -115,7 +117,7 @@ public class TituloServiceImplTest extends CustomTest{
 
 		Titulo t = creaTitulo();
 		tituloService.delete(t);
-		
+		assertTrue("borrado", true);
 	}
 	
 	
@@ -131,7 +133,7 @@ public class TituloServiceImplTest extends CustomTest{
 		log.info("El contador es:" + tituloService.count(l));
 		
 	    t = tituloService.find(lt.get(0).getIdTitulo());
-		
+		assertNotNull("Encontrado", t);
 		
 	}
 	

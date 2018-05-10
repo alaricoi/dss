@@ -21,9 +21,7 @@ public class TituloServiceImpl extends BaseServiceImpl<Integer, Titulo> implemen
 	@Qualifier("tituloDao")
 	private TituloDao dao;
 
-	public TituloServiceImpl() {
-		
-	}
+	
 	@Override
 	public AbstractDao<Integer, Titulo> getDao() {
 		return (AbstractDao<Integer, Titulo>) dao;

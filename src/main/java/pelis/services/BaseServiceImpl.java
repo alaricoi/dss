@@ -44,11 +44,6 @@ public class BaseServiceImpl<P extends Serializable, E> implements BaseService<P
 	}
 
 /**
- * constructour sin parametros
- */
-	public BaseServiceImpl(){
-	}
-/**
  * insertar o editar
  */
 	@Transactional(propagation = Propagation.REQUIRED)

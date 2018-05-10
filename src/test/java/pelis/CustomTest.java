@@ -13,9 +13,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import pelis.configuration.PelisConfiguration;
+import pelis.configuration.SecurityConfiguration;
+import pelis.configuration.SecurityWebApplicationInitializer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PelisConfiguration.class, TestConfiguration.class})
+@ContextConfiguration(classes = {PelisConfiguration.class, TestConfiguration.class,
+		SecurityConfiguration.class, SecurityWebApplicationInitializer.class})
 
 @Transactional
 @WebAppConfiguration

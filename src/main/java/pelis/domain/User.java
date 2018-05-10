@@ -14,7 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import pelis.dto.State;
+import pelis.dto.StateUser;
 
 @Entity
 @Table(name = "APP_USER")
@@ -40,7 +40,7 @@ public class User {
 	private String email;
 
 	@Column(name = "STATE", nullable = false)
-	private String state = State.ACTIVE.getState();
+	private String state = StateUser.ACTIVE.getState();
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "APP_USER_USER_PROFILE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {

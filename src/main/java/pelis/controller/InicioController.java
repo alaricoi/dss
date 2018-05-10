@@ -49,7 +49,7 @@ public class InicioController {
 	 * @return
 	 */
 	@RequestMapping(value = { "/", "admin"}, method = { RequestMethod.GET, RequestMethod.POST })
-	public String inicio(@ModelAttribute("tituloFilter") TituloFilter filtro, HttpServletRequest request, Model model) {
+	public String inicio(@ModelAttribute("tituloFilter") TituloFilter filtro,  Model model) {
 		model.addAttribute("user", getPrincipal());
 		model.addAttribute("message", "Nuestras películas favoritas ");
 
@@ -102,13 +102,7 @@ public class InicioController {
 
 	}
 
-	@RequestMapping(value = "/db", method = RequestMethod.GET)
-	public String dbaPage(ModelMap model) {
-		model.addAttribute("user", getPrincipal());
-		model.addAttribute("listaPelis", tituloService.getAll());
-
-		return "dba";
-	}
+	
 
 	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
 	public String accessDeniedPage(ModelMap model) {

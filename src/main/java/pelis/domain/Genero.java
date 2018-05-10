@@ -89,10 +89,8 @@ public class Genero {
 				return false;
 		} else if (!dsGenero.equals(other.dsGenero))
 			return false;
-		if (idGenero != other.idGenero)
-			return false;
-		
-		return true;
+		return (idGenero == other.idGenero);
+			
 	}
 
 }

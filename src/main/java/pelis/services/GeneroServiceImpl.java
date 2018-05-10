@@ -16,12 +16,7 @@ public class GeneroServiceImpl extends BaseServiceImpl<Integer, Genero> implemen
 	@Autowired
 	@Qualifier("generoDao") 
 	private GeneroDao dao;
-/**
- * constructor sin parametros
- */
-	public GeneroServiceImpl() {
 
-	}
 
 	@PostConstruct
 	public void init() {
