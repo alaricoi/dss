@@ -50,7 +50,7 @@
    
    
 			<label for="dsGenero">Descripción</label>
-		 <input type="text" id="dsGenero" name="dsGenero"/></dd>
+		 <input type="text" id="dsGenero" name="dsGenero" maxlength="45"/></dd>
 			
 	
       

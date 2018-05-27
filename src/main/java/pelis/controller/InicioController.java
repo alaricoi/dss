@@ -136,4 +136,10 @@ public class InicioController {
 		}
 		return userName;
 	}
+	
+	@RequestMapping(value = "fileupload", method = RequestMethod.GET)
+	   public String redirect() {
+	      return "fileupload";
+	   }
+
 }
